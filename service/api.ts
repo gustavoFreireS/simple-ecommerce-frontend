@@ -1,6 +1,9 @@
+import { Key } from "swr";
+
 const baseURL: string = process.env.NEXT_PUBLIC_API_HOST;
 
-const fetcher = (...args) => fetch(null, ...args).then((res) => res.json());
+const fetcher = (input: RequestInfo, init: RequestInit, ...args: any[]) =>
+  fetch(input, init, ...args).then((res) => res.json());
 
 const poster = async (input: RequestInfo, init: RequestInit) => {
   const res = await fetch(`${baseURL}input`, {
@@ -15,6 +18,4 @@ const poster = async (input: RequestInfo, init: RequestInit) => {
 
 export { fetcher, poster, baseURL };
 
-export async function getStaticProps() {
-    
-}
+export async function getStaticProps() {}

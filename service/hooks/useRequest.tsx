@@ -1,15 +1,16 @@
 import useSWR, { Key } from "swr";
-import { poster, fetcher } from "../api";
+import { poster, fetcher, baseURL } from "../api";
 
 type RequestType = "get" | "post";
 
 const UseRequest = (
   url: Key,
   type: RequestType = "get",
-  body: RequestInit
+  body?: RequestInit
 ) => {
-  if (type === "get") return useSWR(url, fetcher);
+  console.log(url);
+  if (type === "get") return useSWR(`${baseURL}${url}`, fetcher);
   return useSWR([url, body], poster);
 };
 
-export default UseRequest
+export default UseRequest;
